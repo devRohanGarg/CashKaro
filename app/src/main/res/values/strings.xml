@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CashKaro</string>
     <string name="tag_line">No.1 Coupons Site in India</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">CashKaro</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
