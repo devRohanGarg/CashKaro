@@ -19,17 +19,26 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/logo" />
 
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/button_twitter_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login with Twitter" />
+
     <TextView
+        android:id="@+id/status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Rohan Garg"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:visibility="gone" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="dev.RohanGarg@gmail.com" />
+        android:text="dev.RohanGarg@gmail.com"
+        android:visibility="gone" />
 
 </LinearLayout>
