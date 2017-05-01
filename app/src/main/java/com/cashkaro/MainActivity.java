@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar s = Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar s = Snackbar.make(view, "Loading awesome deals for you!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null);
                 TextView st = (TextView) s.getView().findViewById(android.support.design.R.id.snackbar_text);
                 st.setTypeface(Utils.regularFont);
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
                 imageView.setImageResource(sampleImages[position]);
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             }
         };
 
