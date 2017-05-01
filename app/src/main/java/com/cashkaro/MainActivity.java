@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.TwitterAuthProvider;
 import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
@@ -142,6 +143,13 @@ public class MainActivity extends BaseActivity
         mCarouselView = (CarouselView) findViewById(R.id.carouselView);
         mCarouselView.setPageCount(sampleImages.length);
         mCarouselView.setImageListener(imageListener);
+
+        mCarouselView.setImageClickListener(new ImageClickListener() {
+            @Override
+            public void onClick(int position) {
+                Toast.makeText(MainActivity.this, "Clicked item: " + position + 1, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Utils.setFontAllView((ViewGroup) navigationView.getHeaderView(0));
         setFonts(navigationView.getMenu());
