@@ -39,6 +39,7 @@ dependencies {
     compile('com.twitter.sdk.android:twitter:2.3.2@aar') {
         transitive = true
     }
+    compile 'com.github.delight-im:Android-AdvancedWebView:v3.0.0'
 }
 
 
