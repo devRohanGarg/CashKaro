@@ -71,11 +71,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_weight="0.5"
-                android:background="@color/accent"
                 android:padding="8dp"
                 android:text="Shop"
                 android:textAllCaps="true"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/accent" />
         </LinearLayout>
     </LinearLayout>
 

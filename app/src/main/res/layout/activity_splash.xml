@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:padding="8dp"
     app:cardCornerRadius="4dp"
     app:cardElevation="8dp"
     tools:context="com.cashkaro.SplashActivity">
@@ -12,12 +13,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="80dp"
         android:drawablePadding="8dp"
         android:drawableTop="@drawable/logo"
         android:gravity="center"
         android:padding="8dp"
+        android:tag="bold"
         android:text="@string/tag_line"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textSize="20sp" />
 
 </android.support.v7.widget.CardView>
