@@ -8,7 +8,7 @@ import android.widget.TextView;
 public class Utils {
     private static final String BOLD_FONT_PATH = "Montserrat-Bold.ttf";
     private static final String REGULAR_FONT_PATH = "Montserrat-Regular.ttf";
-    private static Typeface regularFont, boldFont;
+    public static Typeface regularFont, boldFont;
 
     static void loadFonts() {
         regularFont = Typeface.createFromAsset(MyApp.getContext().getAssets(),
