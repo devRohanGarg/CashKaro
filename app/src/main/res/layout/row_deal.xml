@@ -67,10 +67,12 @@
                 android:textColor="@color/accent" />
 
             <android.support.v7.widget.AppCompatButton
+                android:id="@+id/shop"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_weight="0.5"
+                android:onClick="loadDeal"
                 android:padding="8dp"
                 android:text="Shop"
                 android:textAllCaps="true"

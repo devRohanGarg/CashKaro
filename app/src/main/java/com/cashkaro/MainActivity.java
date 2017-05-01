@@ -155,6 +155,16 @@ public class MainActivity extends BaseActivity
         setFonts(navigationView.getMenu());
     }
 
+    public void loadDeal(View view) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null)
+            startActivity(new Intent(MainActivity.this, WebViewActivity.class).putExtra("URL", "http://cashkaro.com/stores/flipkart"));
+        else {
+            Toast.makeText(MainActivity.this, "Please login first!", Toast.LENGTH_LONG).show();
+            mLoginButton.callOnClick();
+        }
+    }
+
     // [START on_start_check_user]
     @Override
     public void onStart() {
