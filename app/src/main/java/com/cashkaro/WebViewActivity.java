@@ -36,7 +36,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         //Get an instance of NotificationManager//
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.ic_launcher_round)
+                        .setSmallIcon(R.drawable.ic_stat_logo)
                         .setContentTitle("Congratulations!")
                         .setContentText("You have clicked on " + getIntent().getExtras().getString("NAME", "a deal"));
 
