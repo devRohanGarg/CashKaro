@@ -1,13 +1,17 @@
 package com.cashkaro;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cashkaro.utils.AppStatus;
 import com.cashkaro.utils.CustomTypefaceSpan;
 import com.cashkaro.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -158,7 +163,10 @@ public class MainActivity extends BaseActivity
     public void loadDeal(View view) {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null)
-            startActivity(new Intent(MainActivity.this, WebViewActivity.class).putExtra("URL", "http://cashkaro.com/stores/flipkart"));
+            if (AppStatus.getInstance(this).isOnline())
+                startActivity(new Intent(MainActivity.this, WebViewActivity.class).putExtra("URL", "http://cashkaro.com/stores/flipkart"));
+            else
+                Toast.makeText(this, "You are offline!", Toast.LENGTH_LONG).show();
         else {
             Toast.makeText(MainActivity.this, "Please login first!", Toast.LENGTH_LONG).show();
             mLoginButton.callOnClick();
@@ -295,11 +303,46 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.scan_code) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
+                }
+            }
+        } else if (id == R.id.location) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                }
+            }
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 0: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Camera Permission Granted!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Camera Permission Denied!", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Location Permission Granted!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Location Permission Denied!", Toast.LENGTH_LONG).show();
+                }
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
