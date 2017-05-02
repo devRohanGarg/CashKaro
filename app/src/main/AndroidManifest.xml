@@ -32,6 +32,15 @@
         <activity
             android:name=".WebViewActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".StoreActivity"
+            android:label="@string/title_activity_store"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cashkaro.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

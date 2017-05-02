@@ -50,12 +50,17 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 
+import java.util.HashMap;
+import java.util.Random;
+
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     int[] sampleImages = {R.drawable.slide_1, R.drawable.slide_2, R.drawable.slide_3, R.drawable.slide_4, R.drawable.slide_5};
+    String[] keys = {"Amazon", "Jabong", "Nykaa", "MobiKwik", "Flipkart"};
+    HashMap<String, String> storeURL = new HashMap<>();
     TwitterAuthClient mTwitterAuthClient;
     private CarouselView mCarouselView;
     private String TAG = "Login";
@@ -152,9 +157,16 @@ public class MainActivity extends BaseActivity
         mCarouselView.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
-                Toast.makeText(MainActivity.this, "Clicked item: " + position + 1, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Clicked item: " + (position + 1), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, StoreActivity.class).putExtra("NAME", keys[position]).putExtra("URL", storeURL.get(keys[position])));
             }
         });
+
+        storeURL.put("Amazon", "http://cashkaro.com/stores/amazon");
+        storeURL.put("Jabong", "http://cashkaro.com/stores/jabong");
+        storeURL.put("Nykaa", "http://cashkaro.com/stores/nykaa");
+        storeURL.put("MobiKwik", "http://cashkaro.com/stores/mobikwik");
+        storeURL.put("Flipkart", "http://cashkaro.com/stores/flipkart");
 
         Utils.setFontAllView((ViewGroup) navigationView.getHeaderView(0));
         setFonts(navigationView.getMenu());
@@ -163,9 +175,11 @@ public class MainActivity extends BaseActivity
     public void loadDeal(View view) {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null)
-            if (AppStatus.getInstance(this).isOnline())
-                startActivity(new Intent(MainActivity.this, WebViewActivity.class).putExtra("URL", "http://cashkaro.com/stores/flipkart"));
-            else
+            if (AppStatus.getInstance(this).isOnline()) {
+                Random r = new Random();
+                int result = r.nextInt(keys.length);
+                startActivity(new Intent(MainActivity.this, WebViewActivity.class).putExtra("URL", storeURL.get(keys[result])));
+            } else
                 Toast.makeText(this, "You are offline!", Toast.LENGTH_LONG).show();
         else {
             Toast.makeText(MainActivity.this, "Please login first!", Toast.LENGTH_LONG).show();
