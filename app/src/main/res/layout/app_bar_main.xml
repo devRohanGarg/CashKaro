@@ -28,7 +28,7 @@
                 app:fillColor="#FFFFFFFF"
                 app:pageColor="#00000000"
                 app:radius="6dp"
-                app:slideInterval="2000"
+                app:slideInterval="2500"
                 app:strokeColor="#FF777777"
                 app:strokeWidth="1dp"
                 tools:layout_editor_absoluteY="4dp" />

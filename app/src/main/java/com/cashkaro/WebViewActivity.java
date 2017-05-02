@@ -1,8 +1,11 @@
 package com.cashkaro;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -23,12 +26,28 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         mWebView.setListener(this, this);
         mWebView.loadUrl(getIntent().getExtras().getString("URL", "http://cashkaro.com/"));
 
-        if (getSupportActionBar() != null)
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setTitle(getIntent().getExtras().getString("NAME", ""));
+        }
+    }
+
+    void sendNotification() {
+        //Get an instance of NotificationManager//
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_launcher_round)
+                        .setContentTitle("Congratulations!")
+                        .setContentText("You have clicked on " + getIntent().getExtras().getString("NAME", "a deal"));
+
+        // Gets an instance of the NotificationManager service//
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(0, mBuilder.build());
     }
 
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
+        sendNotification();
         Snackbar s = Snackbar.make(mWebView, "Loading the deal for you!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null);
         TextView st = (TextView) s.getView().findViewById(android.support.design.R.id.snackbar_text);

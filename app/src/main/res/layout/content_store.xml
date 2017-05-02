@@ -8,10 +8,30 @@
     tools:context="com.cashkaro.StoreActivity"
     tools:showIn="@layout/activity_store">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:tag="bold"
+            android:text="Store Deals"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+        <include layout="@layout/row_store_detail" />
+
+        <include layout="@layout/row_deal" />
+
+        <include layout="@layout/row_deal" />
+
+        <include layout="@layout/row_deal" />
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

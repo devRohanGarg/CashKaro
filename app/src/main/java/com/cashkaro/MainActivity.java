@@ -157,8 +157,7 @@ public class MainActivity extends BaseActivity
         mCarouselView.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
-                Toast.makeText(MainActivity.this, "Clicked item: " + (position + 1), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, StoreActivity.class).putExtra("NAME", keys[position]).putExtra("URL", storeURL.get(keys[position])));
+                startActivity(new Intent(MainActivity.this, StoreActivity.class).putExtra("NAME", keys[position]).putExtra("URL", storeURL.get(keys[position])).putExtra("POSITION", position));
             }
         });
 
@@ -178,7 +177,7 @@ public class MainActivity extends BaseActivity
             if (AppStatus.getInstance(this).isOnline()) {
                 Random r = new Random();
                 int result = r.nextInt(keys.length);
-                startActivity(new Intent(MainActivity.this, WebViewActivity.class).putExtra("URL", storeURL.get(keys[result])));
+                startActivity(new Intent(MainActivity.this, WebViewActivity.class).putExtra("URL", storeURL.get(keys[result])).putExtra("NAME", keys[result]));
             } else
                 Toast.makeText(this, "You are offline!", Toast.LENGTH_LONG).show();
         else {
