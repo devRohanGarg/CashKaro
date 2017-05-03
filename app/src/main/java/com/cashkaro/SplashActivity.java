@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 
 import com.cashkaro.utils.Utils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -15,6 +17,13 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         Utils.setFontAllView((ViewGroup) findViewById(R.id.root));
+        int delay = 0;
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser == null)
+            delay = 1500;
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -23,6 +32,6 @@ public class SplashActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.push_right_in, R.anim.push_left_out);
                 finish();
             }
-        }, 1500);
+        }, delay);
     }
 }
