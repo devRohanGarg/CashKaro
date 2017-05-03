@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cashkaro.utils.AppStatus;
@@ -18,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Random;
+
+import butterknife.ButterKnife;
 
 public class StoreActivity extends AppCompatActivity {
 
@@ -29,17 +32,20 @@ public class StoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_store);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        ButterKnife.bind(this);
+        FloatingActionButton fab = ButterKnife.findById(this, R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Thanks for your love!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar s = Snackbar.make(view, "Thanks for your love!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                TextView st = (TextView) s.getView().findViewById(android.support.design.R.id.snackbar_text);
+                st.setTypeface(Utils.regularFont);
+                s.show();
             }
         });
         Intent i = getIntent();
-        ImageView image = (ImageView) findViewById(R.id.image);
+        ImageView image = ButterKnife.findById(this, R.id.image);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

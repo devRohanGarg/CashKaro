@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.cashkaro.utils.Utils;
 
+import butterknife.ButterKnife;
 import im.delight.android.webview.AdvancedWebView;
 
 public class WebViewActivity extends AppCompatActivity implements AdvancedWebView.Listener {
@@ -21,8 +22,8 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
-
-        mWebView = (AdvancedWebView) findViewById(R.id.webview);
+        ButterKnife.bind(this);
+        mWebView = ButterKnife.findById(this, R.id.webview);
         mWebView.setListener(this, this);
         mWebView.loadUrl(getIntent().getExtras().getString("URL", "http://cashkaro.com/"));
 

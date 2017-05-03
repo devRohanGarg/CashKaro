@@ -53,6 +53,7 @@ import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import java.util.HashMap;
 import java.util.Random;
 
+import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends BaseActivity
@@ -83,12 +84,12 @@ public class MainActivity extends BaseActivity
 
         // Inflate layout (must be done after Twitter is configured)
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
         Utils.setFontAllView((ViewGroup) findViewById(R.id.drawer_layout));
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = ButterKnife.findById(this, R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,13 +101,13 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = ButterKnife.findById(this, R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = ButterKnife.findById(this, R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Views
